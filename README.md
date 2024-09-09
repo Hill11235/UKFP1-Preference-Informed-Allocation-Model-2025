@@ -4,7 +4,7 @@ Uses a rough Monte Carlo simulation model to determine probability of being plac
 
 ### Overview
 
-Uses the existing first preference competition ratios to estimate overall deanery popularity. Use this to simulate n student location selections, then run PIA m times with a given preference selection. Use the m PIA runs to determine probability of ending up in a given deanery based on the selection.
+Uses the existing first preference competition ratios to estimate overall deanery popularity. Use this to simulate student location selections (number equal to total of available positions), then run PIA m times with a given preference selection. Use the m PIA runs to determine probability of ending up in a given deanery based on the selection.
 
 
 ### Preference Informed Allocation (PIA)
@@ -18,5 +18,6 @@ See UKFP 2024 Preference Informed Allocation Webinar on youtube for more informa
 ### Assumptions
 - Does not consider pre-allocation.
 - Does not consider linked applications.
+- Number of available allocations == number of students applying.
 - Currently assumes relative popularity based on ratios, eg. London, Severn, Oxford etc. This will not reflect reality as no one should be mad enough to put consecutive over subscribed deaneries at the top of their list.
 - Loads of others.

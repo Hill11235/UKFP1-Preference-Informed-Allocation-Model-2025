@@ -7,11 +7,12 @@ import (
 )
 
 func main() {
-	// create an ingester
+	// TODO: track how long this whole simulation takes
+
 	ingester := algo.NewIngester()
 	fmt.Println(ingester.AvailablePositions)
 
-	// create selections
-	// run pia algo
-	// print the outcome
+	// TODO: create selections
+	// TODO: run pia algo
+	// TODO: print the outcome
 }
