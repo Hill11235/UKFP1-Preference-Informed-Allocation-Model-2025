@@ -2,10 +2,11 @@
 
 Uses a rough Monte Carlo simulation model to determine probability of being placed in a given deanery given a selection. Uses the [existing first preference competition ratios](https://foundationprogramme.nhs.uk/programmes/2-year-foundation-programme/ukfp/competition-ratios/) as well as an attempt to replicate the preference information allocation algorithm that is used.
 
+Both the code and assumptions are ropey, but I think this is better than nothing.
+
 ### Overview
 
 Uses the existing first preference competition ratios to estimate overall deanery popularity. Use this to simulate student location selections (number equal to total of available positions), then run PIA m times with a given preference selection. Use the m PIA runs to determine probability of ending up in a given deanery based on the selection.
-
 
 ### Preference Informed Allocation (PIA)
 Based on the information and flow diagram shared [here](https://madeinheene.hee.nhs.uk/Portals/12/UKFP%202024%20Applicant%20Guide%20to%20Allocation%20-%20Preference%20Informed%20Allocation%20.pdf). Two passes are made:
@@ -19,5 +20,5 @@ See UKFP 2024 Preference Informed Allocation Webinar on youtube for more informa
 - Does not consider pre-allocation.
 - Does not consider linked applications.
 - Number of available allocations == number of students applying.
-- Currently assumes relative popularity based on ratios minus those locations which are over-subscribed. This will should reflect reality as no one should be mad enough to put consecutive over subscribed deaneries at the top of their list.
+- For simulating student selections this currently assumes relative popularity based on published competition ratios, minus those locations which are over-subscribed. This will should reflect reality as no one should be mad enough to put consecutive over subscribed deaneries at the top of their list. However this introduces the Northern Ireland problem. NI, a relatively popular first choice, is unlikely to be popular beyond first choice, however the way the model works will assume it is.
 - Loads of others.
