@@ -10,9 +10,8 @@ func main() {
 	// TODO: track how long this whole simulation takes
 
 	ingester := algo.NewIngester()
-	fmt.Println(ingester.AvailablePositions)
-
-	// TODO: create selections
+	selections := algo.NewSelections(ingester)
+	fmt.Println(selections)
 	// TODO: run pia algo
 	// TODO: print the outcome
 }
