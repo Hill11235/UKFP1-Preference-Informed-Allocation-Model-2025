@@ -1,4 +1,4 @@
-# deanery-model
+# UKFP1-Preference-Informed-Allocation-Model-2025
 
 Uses a rough Monte Carlo simulation model to determine probability of being placed in a given deanery given a selection. Uses the [existing first preference competition ratios](https://foundationprogramme.nhs.uk/programmes/2-year-foundation-programme/ukfp/competition-ratios/) as well as an attempt to replicate the preference information allocation algorithm that is used.
 
