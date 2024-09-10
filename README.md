@@ -8,7 +8,7 @@ Uses the existing first preference competition ratios to estimate overall deaner
 
 
 ### Preference Informed Allocation (PIA)
-Two passes are made:
+Based on the information and flow diagram shared [here](https://madeinheene.hee.nhs.uk/Portals/12/UKFP%202024%20Applicant%20Guide%20to%20Allocation%20-%20Preference%20Informed%20Allocation%20.pdf). Two passes are made:
 
 - 1st pass-algorithm works through randomly generated list. If a place is available in applicant's first choice foundation school, they will be allocated. If not, they will be skipped. Works through every applicant, giving only first choices if they are available.
 - 2nd pass-algorithm will again work through list. Any unplaced applicants will be allocated a place in their highest preference that still has places. (After the first pass).

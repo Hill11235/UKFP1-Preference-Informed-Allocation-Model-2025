@@ -1,6 +1,7 @@
 package algo
 
 import (
+	"fmt"
 	"math"
 	"sort"
 )
@@ -10,6 +11,7 @@ type Selections struct {
 }
 
 func NewSelections(ingester *Ingester) *Selections {
+	fmt.Println("Simulating student rankings...")
 	selections := generateSimulationsWithFirstChoice(ingester)
 	completeSubsequentChoices(&selections, ingester)
 

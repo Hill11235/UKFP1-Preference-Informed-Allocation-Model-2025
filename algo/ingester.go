@@ -23,7 +23,7 @@ type Ingester struct {
 }
 
 func NewIngester() *Ingester {
-	fmt.Println("----- Ingesting data -----")
+	fmt.Println("Ingesting data...")
 	ing := Ingester{
 		Ranking:            generateRanking(),
 		Ratios:             generateRatios(),
