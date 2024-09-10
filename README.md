@@ -19,5 +19,5 @@ See UKFP 2024 Preference Informed Allocation Webinar on youtube for more informa
 - Does not consider pre-allocation.
 - Does not consider linked applications.
 - Number of available allocations == number of students applying.
-- Currently assumes relative popularity based on ratios, eg. London, Severn, Oxford etc. This will not reflect reality as no one should be mad enough to put consecutive over subscribed deaneries at the top of their list.
+- Currently assumes relative popularity based on ratios minus those locations which are over-subscribed. This will should reflect reality as no one should be mad enough to put consecutive over subscribed deaneries at the top of their list.
 - Loads of others.
