@@ -6,7 +6,7 @@ Both the code and assumptions are ropey, but I think this is better than nothing
 
 ### Overview
 
-Uses the existing first preference competition ratios to estimate overall deanery popularity. Use this to simulate student location selections (number equal to total of available positions), then run PIA m times with a given preference selection. Use the m PIA runs to determine probability of ending up in a given deanery based on the selection.
+Uses the existing first preference competition ratios to estimate overall deanery popularity. Use this to simulate student location selections (number equal to total of available positions), then run PIA `m` times with a given preference selection. Use the `m` PIA runs to estimate the probability of ending up in a given deanery based on the selection.
 
 ### Preference Informed Allocation (PIA)
 Based on the information and flow diagram shared [here](https://madeinheene.hee.nhs.uk/Portals/12/UKFP%202024%20Applicant%20Guide%20to%20Allocation%20-%20Preference%20Informed%20Allocation%20.pdf). Two passes are made:
@@ -20,5 +20,11 @@ See UKFP 2024 Preference Informed Allocation Webinar on youtube for more informa
 - Does not consider pre-allocation.
 - Does not consider linked applications.
 - Number of available allocations == number of students applying.
-- For simulating student selections this currently assumes relative popularity based on published competition ratios, minus those locations which are over-subscribed. This will should reflect reality as no one should be mad enough to put consecutive over subscribed deaneries at the top of their list. However this introduces the Northern Ireland problem. NI, a relatively popular first choice, is unlikely to be popular beyond first choice, however the way the model works will assume it is.
 - Loads of others.
+
+### Approach to simulating beyond first choice
+Given we only have competition ratios for first choices, I've had to make assumptions around subsequent rankings (2 onwards). For this the model currently assumes relative popularity based on the published competition ratios, minus those locations which are over-subscribed.
+
+Eg. say London is your first choice, no one should be putting Severn (the second most popular) as their second choice as in the event they didn't get London, they definitely wouldn't get Severn as it would be fully allocated by the second pass.
+
+So the model then just ranks everyone's preferences based on the competition ratio unless a deanery's competition ratio is greater than 1. Oversubscribed deaneries are placed are placed at the bottom of the simulated rankings. This should (hopefully) reflect reality however this introduces the Northern Ireland problem. NI, a relatively popular first choice, is unlikely to be popular beyond first choice, however the way the model works will assume it is. (Nothing against NI, I'm from there and am very fond of it, but it's not for everyone)
