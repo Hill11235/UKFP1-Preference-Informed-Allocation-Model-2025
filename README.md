@@ -16,7 +16,7 @@ Based on the information and flow diagram shared [here](https://madeinheene.hee.
 
 See UKFP 2024 Preference Informed Allocation Webinar on youtube for more information.
 
-### Assumptions
+### Assumptions / Issues
 - Does not consider pre-allocation.
 - Does not consider linked applications.
 - Number of available allocations == number of students applying.
