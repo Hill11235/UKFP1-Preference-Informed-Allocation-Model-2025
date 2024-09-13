@@ -23,8 +23,6 @@ See UKFP 2024 Preference Informed Allocation Webinar on youtube for more informa
 - Loads of others.
 
 ### Approach to simulating beyond first choice
-Given we only have competition ratios for first choices, I've had to make assumptions around subsequent rankings (2 onwards). For this the model currently assumes relative popularity based on the published competition ratios, minus those locations which are over-subscribed.
+Given we only have competition ratios for first choices, I've had to make assumptions around subsequent rankings (2 onwards). For this the model currently assumes relative popularity based on the published competition ratios.
 
-Eg. say London is your first choice, no one should be putting Severn (the second most popular) as their second choice as in the event they didn't get London, they definitely wouldn't get Severn as it would be fully allocated by the second pass.
-
-So the model then just ranks everyone's preferences based on the competition ratio unless a deanery's competition ratio is greater than 1. Oversubscribed deaneries are placed are placed at the bottom of the simulated rankings. This should (hopefully) reflect reality however this introduces the Northern Ireland problem. NI, a relatively popular first choice, is unlikely to be popular beyond first choice, however the way the model works will assume it is. (Nothing against NI, I'm from there and am very fond of it, but it's not for everyone)
+So the model ranks everyone's subsequent preferences based on the competition ratio. This should (hopefully) reflect reality however this introduces the Northern Ireland problem. NI, a relatively popular first choice, is unlikely to be popular beyond first choice, however the way the model works will assume it is. (Nothing against NI, I'm from there and am very fond of it, but it's not for everyone)

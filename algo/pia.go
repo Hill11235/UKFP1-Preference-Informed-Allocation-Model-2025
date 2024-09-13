@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-const NumIterations = 1000
+const NumIterations = 10000
 
 func MonteCarloPIA(selections *Selections, ingester *Ingester) map[string]int {
 	destinations := generateEmptyRankingMap()
@@ -43,7 +43,6 @@ func Pia(selections *Selections, ingester *Ingester) string {
 		}
 	}
 
-	iteration := 2
 	for len(allocatedStudents) != numStudents {
 		for _, studentNum := range order {
 			if containsInt(allocatedStudents, studentNum) {
@@ -54,17 +53,21 @@ func Pia(selections *Selections, ingester *Ingester) string {
 				studentRanking = ingester.Ranking
 			}
 
-			choice := getChoice(studentRanking, iteration)
+			var choice string
 
-			if allocatedLocations[choice] < ingester.AvailablePositions[choice] {
-				allocatedLocations[choice]++
-				allocatedStudents = append(allocatedStudents, studentNum)
-				if studentNum == ownRanking {
-					return choice
+			for i := range len(studentRanking) {
+				choice = getChoice(studentRanking, i)
+
+				if allocatedLocations[choice] < ingester.AvailablePositions[choice] {
+					allocatedLocations[choice]++
+					allocatedStudents = append(allocatedStudents, studentNum)
+					if studentNum == ownRanking {
+						return choice
+					}
+					break
 				}
 			}
 		}
-		iteration++
 	}
 
 	return "Error"
