@@ -1,6 +1,7 @@
 package algo
 
 import (
+	"fmt"
 	"math/rand"
 	"sync"
 	"time"
@@ -14,6 +15,7 @@ const (
 func MonteCarloPIA(selections *Selections, ingester *Ingester) map[string]int {
 	destinations := generateEmptyRankingMap()
 	var wg sync.WaitGroup
+	fmt.Printf("Running the algorithm %v times and estimating probabilities...", NumIterations)
 
 	results := make(chan string, NumIterations)
 
@@ -23,7 +25,7 @@ func MonteCarloPIA(selections *Selections, ingester *Ingester) map[string]int {
 			defer wg.Done()
 			for j := 0; j < NumIterations/NumWorkers; j++ {
 				r := rand.New(rand.NewSource(time.Now().UnixNano()))
-				output := Pia(selections, ingester, r)
+				output := pia(selections, ingester, r)
 				results <- output
 			}
 		}()
@@ -41,7 +43,7 @@ func MonteCarloPIA(selections *Selections, ingester *Ingester) map[string]int {
 	return destinations
 }
 
-func Pia(selections *Selections, ingester *Ingester, r *rand.Rand) string {
+func pia(selections *Selections, ingester *Ingester, r *rand.Rand) string {
 	numStudents := len(selections.Rankings)
 	order := generateRandomOrder(numStudents, r)
 	allocatedLocations := generateEmptyRankingMap()

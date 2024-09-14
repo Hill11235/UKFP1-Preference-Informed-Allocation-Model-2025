@@ -33,12 +33,10 @@ func sortAndPrettyPrintMap(m map[string]int, ingester *algo.Ingester) {
 		sortedSlice = append(sortedSlice, kv{k, v})
 	}
 
-	// Sort the slice by value in ascending order
 	sort.Slice(sortedSlice, func(i, j int) bool {
 		return sortedSlice[i].Value < sortedSlice[j].Value
 	})
 
-	// Determine the maximum width for each column
 	maxKeyLen := 0
 	maxCategoryLen := 15
 	for k := range m {
@@ -47,8 +45,8 @@ func sortAndPrettyPrintMap(m map[string]int, ingester *algo.Ingester) {
 		}
 	}
 
-	fmt.Printf("\n\n%-*s | %-*s | Probability\n", maxKeyLen, "Location", maxCategoryLen, "Initial Ranking")
-	fmt.Println(strings.Repeat("-", maxKeyLen+maxCategoryLen+10)) // Adjust based on header length
+	fmt.Printf("\n\n%-*s | %-*s | Estimated Probability\n", maxKeyLen, "Location", maxCategoryLen, "Initial Ranking")
+	fmt.Println(strings.Repeat("-", maxKeyLen+maxCategoryLen+28))
 
 	for idx, val := range sortedSlice {
 		prob := float32(m[val.Key]) / algo.NumIterations
