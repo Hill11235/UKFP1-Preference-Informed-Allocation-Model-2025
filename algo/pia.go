@@ -2,28 +2,50 @@ package algo
 
 import (
 	"math/rand"
+	"sync"
 	"time"
 )
 
-const NumIterations = 10000
+const (
+	NumIterations = 10000
+	NumWorkers    = 10
+)
 
 func MonteCarloPIA(selections *Selections, ingester *Ingester) map[string]int {
 	destinations := generateEmptyRankingMap()
+	var wg sync.WaitGroup
 
-	for range NumIterations {
-		output := Pia(selections, ingester)
-		destinations[output]++
+	results := make(chan string, NumIterations)
+
+	for i := 0; i < NumWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for j := 0; j < NumIterations/NumWorkers; j++ {
+				r := rand.New(rand.NewSource(time.Now().UnixNano()))
+				output := Pia(selections, ingester, r)
+				results <- output
+			}
+		}()
+	}
+
+	go func() {
+		wg.Wait()
+		close(results)
+	}()
+
+	for result := range results {
+		destinations[result]++
 	}
 
 	return destinations
 }
 
-func Pia(selections *Selections, ingester *Ingester) string {
+func Pia(selections *Selections, ingester *Ingester, r *rand.Rand) string {
 	numStudents := len(selections.Rankings)
-	order := generateRandomOrder(numStudents)
+	order := generateRandomOrder(numStudents, r)
 	allocatedLocations := generateEmptyRankingMap()
-	allocatedStudents := make([]int, 0, numStudents)
-	rand.Seed(time.Now().UnixNano())
+	allocatedStudents := make(map[int]struct{}, numStudents)
 	ownRanking := rand.Intn(numStudents)
 
 	for _, studentNum := range order {
@@ -36,7 +58,7 @@ func Pia(selections *Selections, ingester *Ingester) string {
 
 		if allocatedLocations[firstChoice] < ingester.AvailablePositions[firstChoice] {
 			allocatedLocations[firstChoice]++
-			allocatedStudents = append(allocatedStudents, studentNum)
+			allocatedStudents[studentNum] = struct{}{}
 			if studentNum == ownRanking {
 				return firstChoice
 			}
@@ -45,7 +67,7 @@ func Pia(selections *Selections, ingester *Ingester) string {
 
 	for len(allocatedStudents) != numStudents {
 		for _, studentNum := range order {
-			if containsInt(allocatedStudents, studentNum) {
+			if _, allocated := allocatedStudents[studentNum]; allocated {
 				continue
 			}
 			studentRanking := selections.Rankings[studentNum]
@@ -60,7 +82,7 @@ func Pia(selections *Selections, ingester *Ingester) string {
 
 				if allocatedLocations[choice] < ingester.AvailablePositions[choice] {
 					allocatedLocations[choice]++
-					allocatedStudents = append(allocatedStudents, studentNum)
+					allocatedStudents[studentNum] = struct{}{}
 					if studentNum == ownRanking {
 						return choice
 					}
@@ -73,15 +95,6 @@ func Pia(selections *Selections, ingester *Ingester) string {
 	return "Error"
 }
 
-func containsInt(slice []int, element int) bool {
-	for _, v := range slice {
-		if v == element {
-			return true
-		}
-	}
-	return false
-}
-
 func getChoice(ranking map[string]int, val int) string {
 	for k, v := range ranking {
 		if v == val {
@@ -92,15 +105,14 @@ func getChoice(ranking map[string]int, val int) string {
 	return "MISSING"
 }
 
-func generateRandomOrder(length int) []int {
+func generateRandomOrder(length int, r *rand.Rand) []int {
 	slice := make([]int, length)
 
 	for i := range length {
 		slice[i] = i
 	}
 
-	rand.Seed(time.Now().UnixNano())
-	rand.Shuffle(length, func(i, j int) {
+	r.Shuffle(length, func(i, j int) {
 		slice[i], slice[j] = slice[j], slice[i]
 	})
 
