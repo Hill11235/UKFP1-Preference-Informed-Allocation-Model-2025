@@ -11,8 +11,8 @@ Uses the existing first preference competition ratios to estimate overall deaner
 ### Preference Informed Allocation (PIA)
 Based on the information and flow diagram shared [here](https://madeinheene.hee.nhs.uk/Portals/12/UKFP%202024%20Applicant%20Guide%20to%20Allocation%20-%20Preference%20Informed%20Allocation%20.pdf). Two passes are made:
 
-- 1st pass-algorithm works through randomly generated list. If a place is available in applicant's first choice foundation school, they will be allocated. If not, they will be skipped. Works through every applicant, giving only first choices if they are available.
-- 2nd pass-algorithm will again work through list. Any unplaced applicants will be allocated a place in their highest preference that still has places. (After the first pass).
+- 1st pass - algorithm works through randomly generated list. If a place is available in applicant's first choice foundation school, they will be allocated. If not, they will be skipped. Works through every applicant, giving only first choices if they are available.
+- 2nd pass - algorithm will again work through list. Any unplaced applicants will be allocated a place in their highest preference that still has places available after the first pass.
 
 See UKFP 2024 Preference Informed Allocation Webinar on youtube for more information.
 
@@ -23,4 +23,4 @@ See UKFP 2024 Preference Informed Allocation Webinar on youtube for more informa
 - Loads of others.
 
 ### Approach to simulating beyond first choice
-Given we only have competition ratios for first choices, I've had to make assumptions around subsequent rankings (2 onwards). The model ranks everyone's subsequent preferences based on the first choice competition ratio. This introduces the Northern Ireland problem. NI, a relatively popular first choice, is unlikely to be popular beyond first choice, however the way the model works will assume it is. Nothing against NI, I'm from there and I'm very fond of it, but it's not for everyone. So the model is accurate for first choice probabilities. This can be verified as the probability should match `min((1 / 1st choice competition ratio), 1)`, but the probabilities for everything beyond first choice is pure speculation.
+Given we only have competition ratios for first choices, I've had to make assumptions around subsequent rankings. The model ranks everyone's subsequent preferences based on the first choice competition ratio. This introduces the Northern Ireland problem. NI, a relatively popular first choice, is unlikely to be popular beyond first choice, however the model assumes it will be. Nothing against NI, I'm from there and I'm very fond of it, but it's not for everyone. So the model is accurate for first choice probabilities. This can be verified as the probability should match `min((1 / 1st choice competition ratio), 1)`, but the probabilities for everything beyond first choice are pure speculation.
